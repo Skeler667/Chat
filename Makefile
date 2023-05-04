@@ -5,7 +5,8 @@ install:
 	npm ci
 
 start-frontend:
-	-C frontend start
+	-C frontend
+	npm start
 
 start-backend:
 	npx start-server localhost 5001
