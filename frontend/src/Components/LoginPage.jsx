@@ -2,6 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Container, Button, Form, Row, Col, FloatingLabel } from 'react-bootstrap';
+import axios from 'axios';
 
 const SignupSchema = Yup.object().shape({
     login: Yup.string()
@@ -22,8 +23,12 @@ const LoginPage = () => {
     },
     onSubmit: (values) => {
       console.log(values)
+      axios.post('/api/v1/login', { username: formik.initialValues.login, password: formik.initialValues.password })
+      .then((response) => {
+        console.log(response.data); // => { token: ..., username: 'admin' }
+      });
     },
-    validationSchema: SignupSchema
+    validationSchema: SignupSchema,
   })
     return (
       <Container>
