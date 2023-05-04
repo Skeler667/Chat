@@ -5,7 +5,7 @@ import { Container, Button, Form, Row, Col, FloatingLabel } from 'react-bootstra
 import axios from 'axios';
 
 const SignupSchema = Yup.object().shape({
-    login: Yup.string()
+  username: Yup.string()
       .min(4, 'Too Short!')
       .max(12, 'Too Long!')
       .required('Required'),
@@ -18,12 +18,12 @@ const SignupSchema = Yup.object().shape({
 const LoginPage = () => {
   const formik = useFormik({
     initialValues: {
-      login: '',
+      username: '',
       password: '',
     },
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values)
-      axios.post('/api/v1/login', { username: formik.initialValues.login, password: formik.initialValues.password })
+      await axios.post('/api/v1/login', values)
       .then((response) => {
         console.log(response.data); // => { token: ..., username: 'admin' }
       });
@@ -37,10 +37,10 @@ const LoginPage = () => {
           <h1 className="text-center">Authorization</h1>
       <Form onSubmit={formik.handleSubmit} className='mt-4'>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <FloatingLabel label='Login'>
-        <Form.Control autoComplete='off' name="login" value={formik.values.login} onChange={formik.handleChange} type="text" placeholder="Enter login" />
+        <FloatingLabel label='username'>
+        <Form.Control autoComplete='off' name="username" value={formik.values.username} onChange={formik.handleChange} type="text" placeholder="Enter login" />
         </FloatingLabel>
-        {formik.errors.login && formik.touched.login && (<Form.Text className='text-danger'>{formik.errors.login}</Form.Text>)}
+        {formik.errors.username && formik.touched.username && (<Form.Text className='text-danger'>{formik.errors.username}</Form.Text>)}
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword"> 
