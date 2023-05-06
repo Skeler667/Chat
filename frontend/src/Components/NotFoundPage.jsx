@@ -9,7 +9,7 @@ const NotFoundPage = () => {
      height='150px'
      />
     <h1>Page not found</h1>
-    <Button>back to main</Button>
+    <Button className="outline-primary"> <a style={{'color': 'black'}} href="/">Back to main</a></Button>
     </div>
     </>
     )

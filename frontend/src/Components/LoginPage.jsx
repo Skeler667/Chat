@@ -1,8 +1,13 @@
-import React from 'react';
+import  React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useNavigate } from "react-router-dom";
 import { Container, Button, Form, Row, Col, FloatingLabel } from 'react-bootstrap';
 import axios from 'axios';
+import { setChannels } from '../store/slices/channelSlice';
+import { setMessages } from '../store/slices/messagesSlice';
+import { useDispatch } from 'react-redux';
+import { useAuth } from '../hooks/useAuth.hook';
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -16,17 +21,37 @@ const SignupSchema = Yup.object().shape({
   });
 
 const LoginPage = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [authError, setAuthError] = useState(null);
+  const { logIn, setUsername } = useAuth()
   const formik = useFormik({
     initialValues: {
       username: '',
       password: '',
     },
     onSubmit: async (values) => {
-      console.log(values)
-      await axios.post('/api/v1/login', values)
-      .then((response) => {
-        console.log(response.data); // => { token: ..., username: 'admin' }
-      });
+      try {
+        const response = await axios.post('/api/v1/login', values)
+        logIn(response.data.token)
+        setUsername(response.data.username)
+        navigate('/')
+      } catch (error) {
+        setAuthError(error.response.statusText)
+        console.log(error.response.statusText)
+      }
+      try {
+        const response = await axios.get('/api/v1/data', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('user')
+          }})
+        const data = await response.data
+          dispatch(setChannels(data.channels))
+          dispatch(setMessages(data.messages))
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
     },
     validationSchema: SignupSchema,
   })
@@ -48,6 +73,9 @@ const LoginPage = () => {
         <Form.Control autoComplete='off' name="password" value={formik.values.password} onChange={formik.handleChange} type="password" placeholder="Password" />
         </FloatingLabel>
         {formik.errors.password && formik.touched.password && (<Form.Text className='text-danger'>{formik.errors.password}</Form.Text>) }
+        <Form.Text className='text-danger'>
+          {authError ? 'Ошибка авторизации': null }
+        </ Form.Text>
       </Form.Group>
       <div className="d-grid gap-2">
       <Button size="lg" variant="primary" type="submit">
@@ -55,7 +83,9 @@ const LoginPage = () => {
       </Button>
       </div>
     </Form>
+      <h5 className='mt-3'>Don't have account? <a href="/signup">Register now</a></h5>
     </Col>
+    
     </Row>
     </Container>
     )
