@@ -61,16 +61,16 @@ const LoginPage = () => {
           <Col className="mt-5" md={6} style={{'margin': '0 auto'}} >
           <h1 className="text-center">Authorization</h1>
       <Form onSubmit={formik.handleSubmit} className='mt-4'>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <FloatingLabel label='username'>
-        <Form.Control autoComplete='off' name="username" value={formik.values.username} onChange={formik.handleChange} type="text" placeholder="Enter login" />
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <FloatingLabel label='Username'>
+        <Form.Control autoComplete='off' name="username" value={formik.values.username} onBlur={formik.handleBlur("username")} onChange={formik.handleChange} type="text" placeholder="Enter login" />
         </FloatingLabel>
         {formik.errors.username && formik.touched.username && (<Form.Text className='text-danger'>{formik.errors.username}</Form.Text>)}
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword"> 
       <FloatingLabel label='Password'>
-        <Form.Control autoComplete='off' name="password" value={formik.values.password} onChange={formik.handleChange} type="password" placeholder="Password" />
+        <Form.Control autoComplete='off' name="password" value={formik.values.password} onBlur={formik.handleBlur("password")}  onChange={formik.handleChange} type="password" placeholder="Password" />
         </FloatingLabel>
         {formik.errors.password && formik.touched.password && (<Form.Text className='text-danger'>{formik.errors.password}</Form.Text>) }
         <Form.Text className='text-danger'>
