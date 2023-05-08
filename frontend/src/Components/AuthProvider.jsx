@@ -5,7 +5,6 @@ import { AuthContext } from "../context/AuthContext";
 
 export const AuthProvider = ({ children }) => {
     const currentToken = localStorage.getItem('user');
-    console.log(currentToken)
     const [token, setToken] = useState(currentToken || null);
     const [username, setUsername] = useState( null )
     const navigate = useNavigate()

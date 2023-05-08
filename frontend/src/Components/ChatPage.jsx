@@ -10,11 +10,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 const ChatPage = () => {
     const { username } = useAuth()
-    console.log(username)
     const channels = useSelector((state) => state.channels.channels)
-    console.log(channels)
-    const messages = useSelector((state) => state.messages)
-    console.log(messages)
+    const objectMessages = useSelector((state) => state.messages)
+    const messages = Object.keys(objectMessages)
     return (
     <>
     <Header />
@@ -42,7 +40,11 @@ const ChatPage = () => {
         ))}
         </Col>
         <Col className="col-10">
-            <ul></ul>
+            <ul>
+              { messages.map((message) => (
+                <li key={message}>{message}</li>
+              ))}
+            </ul>
         <Form.Group className="input-group">
           <Form.Control
           placeholder="Write new message..."

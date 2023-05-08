@@ -48,7 +48,6 @@ const LoginPage = () => {
         const data = await response.data
           dispatch(setChannels(data.channels))
           dispatch(setMessages(data.messages))
-        console.log(data)
       } catch (error) {
       }
     },
