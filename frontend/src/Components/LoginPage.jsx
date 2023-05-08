@@ -24,7 +24,7 @@ const LoginPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [authError, setAuthError] = useState(null);
-  const { logIn, setUsername } = useAuth()
+  const { logIn, setUsername, token } = useAuth()
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -43,14 +43,13 @@ const LoginPage = () => {
       try {
         const response = await axios.get('/api/v1/data', {
           headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('user')
+            Authorization: 'Bearer ' + token
           }})
         const data = await response.data
           dispatch(setChannels(data.channels))
           dispatch(setMessages(data.messages))
         console.log(data)
       } catch (error) {
-        console.log(error)
       }
     },
     validationSchema: SignupSchema,
@@ -70,7 +69,7 @@ const LoginPage = () => {
 
       <Form.Group className="mb-3" controlId="formBasicPassword"> 
       <FloatingLabel label='Password'>
-        <Form.Control autoComplete='off' name="password" value={formik.values.password} onBlur={formik.handleBlur("password")}  onChange={formik.handleChange} type="password" placeholder="Password" />
+        <Form.Control autoComplete='off' name="password" value={formik.values.password} onBlur={formik.handleBlur("username")} onChange={formik.handleChange} type="password" placeholder="Password" />
         </FloatingLabel>
         {formik.errors.password && formik.touched.password && (<Form.Text className='text-danger'>{formik.errors.password}</Form.Text>) }
         <Form.Text className='text-danger'>

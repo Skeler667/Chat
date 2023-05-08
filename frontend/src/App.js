@@ -7,6 +7,13 @@ import PrivateRoute from './Components/PrivateRoute';
 import SignUpPage from './Components/SignUpPage';
 import { AuthProvider } from './Components/AuthProvider';
 
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:3000/login');
+  socket.on('message', (message) => {
+    console.log(message); 
+  });
+  socket.emit('message','Hello, my name is Client');
 
 function App() {
   return (
