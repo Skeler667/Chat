@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Container, Button, Form, FloatingLabel } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
+import { useAuth } from '../hooks/useAuth.hook';
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -25,6 +27,9 @@ const validationSchema = Yup.object().shape({
   });
 
  const SignUpPage = () => {
+  const navigate = useNavigate()
+  const { logIn, setUsername, token } = useAuth()
+  const [authError, setAuthError] = useState(null);
     const formik = useFormik({
         initialValues: {
           name: "",
@@ -33,8 +38,15 @@ const validationSchema = Yup.object().shape({
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-         const response = await axios.post('/api/v1/signup', values)
-         console.log(response)
+          try {
+            const response = await axios.post('/api/v1/signup', values)
+            logIn(response.data.token)
+            setUsername(response.data.username)
+            navigate('/')
+          } catch (error) {
+            setAuthError(error.response.statusText)
+            console.log(authError)
+          }
         },
       });
       

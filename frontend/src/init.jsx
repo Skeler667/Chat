@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
-const init = async () => {
+const init = async (socket) => {
   const i18n = i18next.createInstance();
 
   await i18n
