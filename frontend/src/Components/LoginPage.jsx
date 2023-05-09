@@ -24,7 +24,7 @@ const LoginPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [authError, setAuthError] = useState(null);
-  const { logIn, setUsername, token } = useAuth()
+  const { logIn, getAuthHeaders } = useAuth()
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -33,21 +33,18 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post('/api/v1/login', values)
-        logIn(response.data.token)
-        setUsername(response.data.username)
+        logIn(response.data)
         navigate('/')
       } catch (error) {
         setAuthError(error.response.statusText)
         console.log(error.response.statusText)
       }
       try {
-        const response = await axios.get('/api/v1/data', {
-          headers: {
-            Authorization: 'Bearer ' + token
-          }})
+        const response = await axios.get('/api/v1/data', getAuthHeaders())
         const data = await response.data
           dispatch(setChannels(data.channels))
           dispatch(setMessages(data.messages))
+          console.log(data)
       } catch (error) {
       }
     },

@@ -1,24 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 
 export const AuthProvider = ({ children }) => {
-    const currentToken = localStorage.getItem('user');
-    const [token, setToken] = useState(currentToken || null);
-    const [username, setUsername] = useState( null )
-    const navigate = useNavigate()
-    const logIn = (token) => {
-      localStorage.setItem('user', token)
-      navigate('/')
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const [user, setUser] = useState(currentUser || null);
+    const logIn = (user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user)
     }
     const logOut = () => {
       localStorage.removeItem('user')
-      navigate('/login')
+      setUser(null)
+  }
+  const getAuthHeaders = (user) => {
+    return {
+      headers: { Authorization: `Bearer ${user.token}` },
+    }
   }
   
     return (
-      <AuthContext.Provider value={{ username, setUsername, token, setToken, logOut, logIn }}>
+      <AuthContext.Provider value={{ user, getAuthHeaders, logOut, logIn }}>
         {children}
       </AuthContext.Provider>
     );

@@ -3,7 +3,7 @@ import { useAuth } from "../hooks/useAuth.hook";
 
 
 const PrivateRoute = () => {
-const { token } = useAuth()
-return token ? <Outlet/> : <Navigate to='/login'/>;
+const { user } = useAuth()
+return user ? <Outlet/> : <Navigate to='/login'/>;
 }
 export default PrivateRoute;

@@ -6,9 +6,11 @@ import NotFoundPage from './Components/NotFoundPage';
 import PrivateRoute from './Components/PrivateRoute';
 import SignUpPage from './Components/SignUpPage';
 import { AuthProvider } from './Components/AuthProvider';
+import Header from './Components/Header';
 
 const App = () => (
     <AuthProvider>
+      <Header/>
         <Routes>
             <Route element={<PrivateRoute/>}>
               <Route path='/' element={<ChatPage/>} />
