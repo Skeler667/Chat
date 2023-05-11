@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('user')
       setUser(null)
   }
-  const getAuthHeaders = (user) => {
+  const getAuthHeaders = () => {
     return {
       headers: { Authorization: `Bearer ${user.token}` },
     }

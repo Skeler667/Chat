@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
+import axios from "axios";
 import { Col, Container, Row, Nav, Form, Button } from "react-bootstrap"
 import { useAuth } from "../hooks/useAuth.hook"
 import { BsFillSendFill } from 'react-icons/bs';
@@ -8,7 +9,8 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { io } from 'socket.io-client';
 import { useEffect } from "react";
-import { addMessage } from "../store/slices/messagesSlice";
+import { setMessages, addMessage } from "../store/slices/messagesSlice";
+import { setChannels, addChannel } from "../store/slices/channelSlice";
 // import Spinner from 'react-bootstrap/Spinner';
 
 const ChatPage = () => {
@@ -20,10 +22,14 @@ const ChatPage = () => {
       });
     }, [dispatch, socket])
 
-    const { user } = useAuth()
+    const { user, getAuthHeaders } = useAuth()
     const channels = useSelector((state) => state.channels.channels)
     const messages = useSelector((state) => state.messages.messages)
-    console.log(messages)
+    const response = axios.get('/api/v1/data', getAuthHeaders())
+        const data = response.data
+          dispatch(addChannel(data.channels))
+          dispatch(setMessages(data.messages))
+          console.log(data)
     return (
     <>
     <Container style={{'width':'1400px'}}>
