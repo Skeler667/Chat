@@ -25,11 +25,16 @@ const ChatPage = () => {
     const { user, getAuthHeaders } = useAuth()
     const channels = useSelector((state) => state.channels.channels)
     const messages = useSelector((state) => state.messages.messages)
-    const response = axios.get('/api/v1/data', getAuthHeaders())
-        const data = response.data
+    useEffect(() => {
+      const getData = async () => {
+      const response = await axios.get('/api/v1/data', getAuthHeaders())
+        const data = await response.data
           dispatch(addChannel(data.channels))
-          dispatch(setMessages(data.messages))
+          dispatch(addMessage(data.messages))
           console.log(data)
+        }
+        getData()
+    }, [dispatch, getAuthHeaders])
     return (
     <>
     <Container style={{'width':'1400px'}}>
