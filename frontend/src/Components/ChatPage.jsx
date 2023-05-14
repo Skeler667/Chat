@@ -7,31 +7,25 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { io } from 'socket.io-client';
 import { useEffect } from "react";
-import { setMessages, addMessage } from "../store/slices/messagesSlice";
-import { setChannels, addChannel } from "../store/slices/channelSlice";
+import { addMessage } from "../store/slices/messagesSlice";
+import { addChannel } from "../store/slices/channelSlice";
+import useApi from "../hooks/useApi";
 // import Spinner from 'react-bootstrap/Spinner';
 
 const ChatPage = () => {
-    const socket = io();
-    const dispatch = useDispatch();
-    useEffect(() => {
-      socket.on('newMessage', (payload) => {
-        dispatch(addMessage(payload))
-      });
-    }, [dispatch, socket])
-
+    const dispatch = useDispatch()
+    const chatApi = useApi();
     const { user, getAuthHeaders } = useAuth()
     const channels = useSelector((state) => state.channels.channels)
     const messages = useSelector((state) => state.messages.messages)
     useEffect(() => {
       const getData = async () => {
       const response = await axios.get('/api/v1/data', getAuthHeaders())
-        const data = await response.data
+        const data = response.data
           dispatch(addChannel(data.channels))
           dispatch(addMessage(data.messages))
-          console.log(data)
+          console.log(data.messages)
         }
         getData()
     }, [dispatch, getAuthHeaders])
@@ -73,8 +67,14 @@ const ChatPage = () => {
               evt.preventDefault()
               const formData = new FormData(evt.target)
               const body = formData.get("body")
-              socket.emit('newMessage', { body: body, channelId: 1, username: user.username });
-              // addMessage({ body: body, channelId: 1, username: 'vasya' })
+              const data = {
+                body: body,
+                channelId: 1,
+                username: user.username
+              };
+              chatApi.addMessage(data)
+              
+
             }}
             >
         <Form.Group

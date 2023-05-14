@@ -1,16 +1,11 @@
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import init from './init.jsx';
-
-
-// const socket = io('ws://localhost:3000/');
-//   socket.onopen = () => {
-//     console.log('ура победа')
-//   };
+import { io } from 'socket.io-client';
 
 const app = async () => {
+  const socket = io()
   const root = ReactDOM.createRoot(document.getElementById('root'));
-  root.render(await init());
+  root.render(await init(socket));
 };
-
 app();

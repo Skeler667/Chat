@@ -39,14 +39,14 @@ const LoginPage = () => {
         setAuthError(error.response.statusText)
         console.log(error.response.statusText)
       }
-      try {
-        const response = await axios.get('/api/v1/data', getAuthHeaders())
-        const data = await response.data
-          dispatch(setChannels(data.channels))
-          dispatch(setMessages(data.messages))
-          console.log(data)
-      } catch (error) {
-      }
+      // try {
+      //   const response = await axios.get('/api/v1/data', getAuthHeaders())
+      //   const data = await response.data
+      //     dispatch(setChannels(data.channels))
+      //     dispatch(setMessages(data.messages))
+      //     console.log(data)
+      // } catch (error) {
+      // }
     },
     validationSchema: SignupSchema,
   })

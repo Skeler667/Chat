@@ -7,23 +7,31 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import ApiProvider from './Components/ApiProvider';
 
 const init = async (socket) => {
   const i18n = i18next.createInstance();
-
   await i18n
     .use(initReactI18next)
     .init({
       resources,
       fallbackLng: 'ru',
     });
+      // socket.on('newMessage', (payload) => {
+      //   store.dispatch(addMessage(payload))
+      // });
 
+      // const addMessage = () => {
+      //   socket.emit('newMessage', { body: '123', channelId: 1, username: 'oleg' });
+      // }
   return (
     <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
         <I18nextProvider i18n={i18n}>
+          <ApiProvider socket={socket}>
           <App />
+          </ApiProvider>
         </I18nextProvider>
       </Provider>
     </BrowserRouter>
