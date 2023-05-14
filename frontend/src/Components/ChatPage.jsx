@@ -8,8 +8,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useEffect } from "react";
-import { addMessage } from "../store/slices/messagesSlice";
-import { addChannel } from "../store/slices/channelSlice";
+import { setMessages } from "../store/slices/messagesSlice";
+import { setChannels } from "../store/slices/channelSlice";
 import useApi from "../hooks/useApi";
 // import Spinner from 'react-bootstrap/Spinner';
 
@@ -23,8 +23,8 @@ const ChatPage = () => {
       const getData = async () => {
       const response = await axios.get('/api/v1/data', getAuthHeaders())
         const data = response.data
-          dispatch(addChannel(data.channels))
-          dispatch(addMessage(data.messages))
+          dispatch(setChannels(data.channels))
+          dispatch(setMessages(data.messages))
           console.log(data.messages)
         }
         getData()
@@ -57,7 +57,7 @@ const ChatPage = () => {
         <Col className="col-10">
           <div style={{minHeight: '50vh'}}>
             <ul>
-              { messages && messages.map((message) => (
+              { messages.map((message) => (
                 <li key={message.id}><b>{message.username}: </b>{message.body}</li>
               ))}
             </ul>
@@ -65,6 +65,7 @@ const ChatPage = () => {
             <Form
              onSubmit={ (evt) => {
               evt.preventDefault()
+              Form.Control.value=''
               const formData = new FormData(evt.target)
               const body = formData.get("body")
               const data = {
@@ -82,6 +83,7 @@ const ChatPage = () => {
           <Form.Control
           name="body"
           placeholder="Write new message..."
+          autoComplete="off"
           />
           <Button
             type="submit"
