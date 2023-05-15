@@ -9,7 +9,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useEffect } from "react";
 import { setMessages } from "../store/slices/messagesSlice";
-import { setChannels } from "../store/slices/channelSlice";
+import { setChannels, setCurrentChannelId } from "../store/slices/channelSlice";
 import useApi from "../hooks/useApi";
 // import Spinner from 'react-bootstrap/Spinner';
 
@@ -25,7 +25,7 @@ const ChatPage = () => {
         const data = response.data
           dispatch(setChannels(data.channels))
           dispatch(setMessages(data.messages))
-          console.log(data.messages)
+          console.log(data.channels)
         }
         getData()
     }, [dispatch, getAuthHeaders])
@@ -33,29 +33,51 @@ const ChatPage = () => {
     <>
     <Container style={{'width':'1400px'}}>
       <Row className="">
-        <Col className="col-2">
+        <Col className="col-2 border">
             <div>
-                <h3 className="mt-4 mb-4">
+                <h3 className="mt-5 mb-4">
                     Channels 
-                    <a href="/"><AiOutlinePlus/></a>
+                    <a href="#"><AiOutlinePlus/></a>
                 </h3>
             </div>
         { channels.map((channel) => (
         <Nav.Item key={channel.id}>
-            <Nav.Link className="m-2">
-            <DropdownButton
-                as={ButtonGroup}
-                title={channel.name}
-                id="bg-vertical-dropdown-1">
-                <Dropdown.Item eventKey="1">Delete</Dropdown.Item>
-                <Dropdown.Item eventKey="2">Rename</Dropdown.Item>
-            </DropdownButton>
-            </Nav.Link>
+            {/* <Nav.Link className="m-2"> */}
+            <div role="group" className="d-flex dropdown btn-group">
+              <Dropdown>
+              {/* // in Dropdown 
+              <Button
+                variant="secondary"
+                onClick={() => console.log('worked')}
+                type="button"
+                className={`w-100 rounded-0 text-start text-truncate btn btn-secondary`}
+              >
+                <span className="me-1">#</span>
+                {channel.name}
+              </Button>
+              */}
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                  {channel.name}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item >Rename</Dropdown.Item>
+                  <Dropdown.Item >Delete</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              </div>
+            {/* </Nav.Link> */}
         </Nav.Item>
         ))}
         </Col>
-        <Col className="col-10">
-          <div style={{minHeight: '50vh'}}>
+        <Col className="col-10 mt-4">
+        <div className="bg-light mb-4 p-3 shadow-sm small">
+            <p className="m-0">
+              <b># general</b>
+            </p>
+            <span className="text-muted">{messages.length ? messages.length : 0} messages</span>
+          </div>
+          <div style={{minHeight: '70vh'}}>
             <ul>
               { messages.map((message) => (
                 <li key={message.id}><b>{message.username}: </b>{message.body}</li>
@@ -84,6 +106,7 @@ const ChatPage = () => {
           name="body"
           placeholder="Write new message..."
           autoComplete="off"
+          className="mt-auto px-3 py-2"
           />
           <Button
             type="submit"
