@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import SocketContext from '../context/SocketContext';
-import { addMessage } from '../store/slices/messagesSlice';
-import { useEffect } from 'react';
+
 // import from slice channels !!
 
 const ApiProvider = ({ children, socket }) => {
@@ -34,23 +33,6 @@ const ApiProvider = ({ children, socket }) => {
     // renameChannel: withAcknowledgement((...args) => socket.volatile.emit('renameChannel', ...args)),
     // removeChannel: withAcknowledgement((...args) => socket.volatile.emit('removeChannel', ...args)),
   };
-
-
-    // useEffect(() => {
-    //     socket.on('newMessage', (message) => {
-    //       dispatch(addMessage(message));
-    //     });
-        // socket.on('newChannel', (channel) => {
-        //   dispatch(channelsActions.addChannel(channel));
-        // });
-        // socket.on('renameChannel', (channelName) => {
-        //   dispatch(channelsActions.renameChannel(channelName));
-        // });
-        // socket.on('removeChannel', (channelId) => {
-        //   dispatch(channelsActions.removeChannel(channelId));
-        // });
-      // }, [socket, dispatch]);
-
     return (
     <SocketContext.Provider value={api}>
         {children}

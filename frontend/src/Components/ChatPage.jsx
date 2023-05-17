@@ -1,35 +1,27 @@
 import { useDispatch, useSelector } from "react-redux"
-import axios from "axios";
 import { Col, Container, Row, Nav, Form, Button } from "react-bootstrap"
 import { useAuth } from "../hooks/useAuth.hook"
 import { BsFillSendFill } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { useEffect } from "react";
-import { setMessages } from "../store/slices/messagesSlice";
-import { setChannels, setCurrentChannelId } from "../store/slices/channelSlice";
 import useApi from "../hooks/useApi";
-// import Spinner from 'react-bootstrap/Spinner';
+import { fetchData } from "../store/slices/fetchData";
+import Spinner from 'react-bootstrap/Spinner';
 
 const ChatPage = () => {
     const dispatch = useDispatch()
     const chatApi = useApi();
     const { user, getAuthHeaders } = useAuth()
     const channels = useSelector((state) => state.channels.channels)
+    const loading = useSelector((state) => state.channels.loading)
     const messages = useSelector((state) => state.messages.messages)
-    console.log(messages)
     useEffect(() => {
-      const getData = async () => {
-      const response = await axios.get('/api/v1/data', getAuthHeaders())
-        const data = response.data
-          dispatch(setChannels(data.channels))
-          dispatch(setMessages(data.messages))
-          console.log(data.channels)
-        }
-        getData()
-    }, [dispatch, getAuthHeaders])
+      dispatch(fetchData(getAuthHeaders()))
+    }, [])
+    if ( loading ) {
+      return <Spinner/>
+    }
     return (
     <>
     <Container style={{'width':'1400px'}}>
