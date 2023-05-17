@@ -8,8 +8,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import ApiProvider from './Components/ApiProvider';
+import { addMessage } from './store/slices/messagesSlice';
 
 const init = async (socket) => {
+
+  socket.on('newMessage', (payload) => {
+    store.dispatch(addMessage(payload));
+  });
+  // socket.on('newChannel', (payload) => {
+  //   store.dispatch(actions.addChannel({ channel: payload }));
+  // });
+  // socket.on('removeChannel', (payload) => {
+  //   store.dispatch(actions.removeChannel({ channelId: payload.id }));
+  // });
+  // socket.on('renameChannel', (payload) => {
+  //   store.dispatch(actions.renameChannel({
+  //     channelId: payload.id,
+  //     channelName: payload.name,
+  //   }));
+  // });
   const i18n = i18next.createInstance();
   await i18n
     .use(initReactI18next)
@@ -17,13 +34,6 @@ const init = async (socket) => {
       resources,
       fallbackLng: 'ru',
     });
-      // socket.on('newMessage', (payload) => {
-      //   store.dispatch(addMessage(payload))
-      // });
-
-      // const addMessage = () => {
-      //   socket.emit('newMessage', { body: '123', channelId: 1, username: 'oleg' });
-      // }
   return (
     <React.StrictMode>
     <BrowserRouter>
@@ -38,5 +48,4 @@ const init = async (socket) => {
   </React.StrictMode>
   );
 };
-
 export default init;

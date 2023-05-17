@@ -19,6 +19,7 @@ const ChatPage = () => {
     const { user, getAuthHeaders } = useAuth()
     const channels = useSelector((state) => state.channels.channels)
     const messages = useSelector((state) => state.messages.messages)
+    console.log(messages)
     useEffect(() => {
       const getData = async () => {
       const response = await axios.get('/api/v1/data', getAuthHeaders())
@@ -87,7 +88,7 @@ const ChatPage = () => {
             <Form
              onSubmit={ (evt) => {
               evt.preventDefault()
-              Form.Control.value=''
+              evt.value=''
               const formData = new FormData(evt.target)
               const body = formData.get("body")
               const data = {
@@ -95,7 +96,7 @@ const ChatPage = () => {
                 channelId: 1,
                 username: user.username
               };
-              chatApi.addMessage(data)
+              chatApi.sendMessage(data)
               
 
             }}
