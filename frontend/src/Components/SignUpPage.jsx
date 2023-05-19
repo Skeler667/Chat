@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
 
  const SignUpPage = () => {
   const navigate = useNavigate()
-  const { logIn, setUsername, token } = useAuth()
+  const { logIn, user } = useAuth()
   const [authError, setAuthError] = useState(null);
     const formik = useFormik({
         initialValues: {
@@ -39,12 +39,17 @@ const validationSchema = Yup.object().shape({
         validationSchema: validationSchema,
         onSubmit: async (values) => {
           try {
-            const response = await axios.post('/api/v1/signup', values)
-            logIn(response.data.token)
-            setUsername(response.data.username)
+            const userData = {
+              username: values.name,
+              password: values.password
+            }
+            const response = await axios.post('/api/v1/signup', userData)
+            // setUsername(response.data.username)
+            console.log(response.data)
+            logIn(response.data)
             navigate('/')
           } catch (error) {
-            setAuthError(error.response.statusText)
+            // setAuthError(error.response.statusText)
             console.log(authError)
           }
         },

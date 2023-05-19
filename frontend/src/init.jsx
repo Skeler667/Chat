@@ -9,15 +9,16 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import ApiProvider from './Components/ApiProvider';
 import { addMessage } from './store/slices/messagesSlice';
+import { addChannel } from './store/slices/channelSlice';
 
 const init = async (socket) => {
 
   socket.on('newMessage', (payload) => {
     store.dispatch(addMessage(payload));
   });
-  // socket.on('newChannel', (payload) => {
-  //   store.dispatch(actions.addChannel({ channel: payload }));
-  // });
+  socket.on('newChannel', (payload) => {
+    store.dispatch(addChannel(payload));
+  });
   // socket.on('removeChannel', (payload) => {
   //   store.dispatch(actions.removeChannel({ channelId: payload.id }));
   // });
