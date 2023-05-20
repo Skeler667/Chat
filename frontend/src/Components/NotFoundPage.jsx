@@ -1,5 +1,8 @@
-import { Button } from "react-bootstrap"
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+
 const NotFoundPage = () => {
+    const { t } = useTranslation();
     return (
     <>
     <div className="text-center">
@@ -8,8 +11,8 @@ const NotFoundPage = () => {
      width='150px'
      height='150px'
      />
-    <h1>Page not found</h1>
-    <Button className="outline-primary"> <a style={{'color': 'black'}} href="/">Back to main</a></Button>
+    <h1>{t('notFoundPage.title')}</h1>
+    <Link className="text-decoration-none" to={'/'} style={{color:'black'}}>{t('notFoundPage.link')}</Link>
     </div>
     </>
     )

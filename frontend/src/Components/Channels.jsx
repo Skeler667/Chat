@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { Col, Dropdown, ButtonGroup } from 'react-bootstrap';
 import cn from 'classnames';
@@ -7,24 +8,20 @@ import { setCurrentChannelId } from '../store/slices/channelSlice';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 import { showModal } from '../store/slices/modalsSlice';
 
-
 const Channels = () => {
+
     const channels = useSelector((state) => state.channels.channels)
     const dispatch = useDispatch()
-
+    const { t } = useTranslation()
     const currentIdChannel = useSelector((state) => state.channels.currentChannelId)
     const changeChannel = (id) => {
       dispatch(setCurrentChannelId(id))
     }
-    const addNewChannel = () => {
-
-    }
-
     return (
         <Col className="col-2 border">
         <div>
             <h3 className="mt-5 mb-4">
-                <b>Каналы</b> 
+                <b>{t('channels.title')}</b> 
                 <button  onClick={() => dispatch(showModal({ modalType: 'adding', channelId: null }))}  style={{border:'0', marginLeft:'40px'}}>
                   <BsFillPlusSquareFill/>
                   </button>
@@ -46,14 +43,18 @@ const Channels = () => {
 	        </button>
 	
           <Dropdown.Toggle split variant="light" className={`${style}`} id="dropdown-split-basic">
-                <span className="visually-hidden">Чето там</span>
+                <span className="visually-hidden">{t('renameModal.handlingChannel')}</span>
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item>
-                  channels.rename
+                <Dropdown.Item
+                onClick={() => dispatch(showModal({ modalType: 'renaming', channelId: channel.id }))}
+                >
+                  {t('channels.rename')}
                 </Dropdown.Item>
-                <Dropdown.Item>
-                  channels.remove
+                <Dropdown.Item
+                onClick={() => dispatch(showModal({ modalType: 'removing', channelId: channel.id }))}
+                >
+                  {t('channels.remove')}
                 </Dropdown.Item>
               </Dropdown.Menu>
           </Dropdown>

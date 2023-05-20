@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import ApiProvider from './Components/ApiProvider';
 import { addMessage } from './store/slices/messagesSlice';
-import { addChannel } from './store/slices/channelSlice';
+import { addChannel, removeChannel, renameChannel } from './store/slices/channelSlice';
 
 const init = async (socket) => {
 
@@ -19,15 +19,15 @@ const init = async (socket) => {
   socket.on('newChannel', (payload) => {
     store.dispatch(addChannel(payload));
   });
-  // socket.on('removeChannel', (payload) => {
-  //   store.dispatch(actions.removeChannel({ channelId: payload.id }));
-  // });
-  // socket.on('renameChannel', (payload) => {
-  //   store.dispatch(actions.renameChannel({
-  //     channelId: payload.id,
-  //     channelName: payload.name,
-  //   }));
-  // });
+  socket.on('removeChannel', (payload) => {
+    store.dispatch(removeChannel(payload.id));
+  });
+  socket.on('renameChannel', (payload) => {
+    store.dispatch(renameChannel({
+      id: payload.id,
+      name: payload.name,
+    }));
+  });
   const i18n = i18next.createInstance();
   await i18n
     .use(initReactI18next)

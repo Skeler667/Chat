@@ -5,19 +5,17 @@ import {
   Form, Button, Modal, FormText,
 } from 'react-bootstrap';
 import * as Yup from 'yup';
-// import leoProfanity from 'leo-profanity';
-// import { useTranslation } from 'react-i18next';
-// import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { hideModal } from '../../store/slices/modalsSlice';
-import { addChannel, setCurrentChannelId } from '../../store/slices/channelSlice'
-
+import { setCurrentChannelId } from '../../store/slices/channelSlice'
 import useApi from '../../hooks/useApi';
-// import CustomSpinner from '../skeletons/CustomSpinner';
 
 const AddModal = () => {
+  const notify = () => toast("Wow so easy!");
   const channels = useSelector((state) => state.channels.channels);
   const dispatch = useDispatch();
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const chatApi = useApi();
   const inputEl = useRef();
 
@@ -48,7 +46,9 @@ const AddModal = () => {
         const response = await chatApi.addChannel(channelData);
         dispatch(setCurrentChannelId(response.id));
         dispatch(hideModal());
+        toast.success(t('addModal.success'), { icon: '🚀' });
       } catch (err) {
+        toast.error(t('errors.unknown'));
         console.error(err);
       }
     },
@@ -57,7 +57,7 @@ const AddModal = () => {
   return (
     <Modal show>
       <Modal.Header closeButton onHide={() => dispatch(hideModal())}>
-        <Modal.Title>Создать новый канал</Modal.Title>
+        <Modal.Title>{t('addModal.addChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -75,10 +75,10 @@ const AddModal = () => {
             {
               formik.errors.name
               && formik.touched.name
-              && <FormText className="feedback text-danger mt-3">{formik.errors.name}</FormText>
+              && <FormText className="feedback text-danger mt-3">{t(formik.errors.name)}</FormText>
             }
             <Form.Label className="visually-hidden">
-              ChannelName
+            {t('addModal.channelName')}
             </Form.Label>
           </Form.Group>
           <Button
@@ -87,15 +87,16 @@ const AddModal = () => {
             variant="secondary"
             onClick={() => dispatch(hideModal())}
           >
-            cancel
+            {t('addModal.cancel')}
           </Button>
           <Button
             role="button"
             className="m-1"
             variant="primary"
             type="submit"
+            onClick={() => notify()}
           >
-            submit
+            {t('addModal.send')}
           </Button>
         </Form>
       </Modal.Body>
