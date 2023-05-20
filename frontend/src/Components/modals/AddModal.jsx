@@ -12,7 +12,6 @@ import { setCurrentChannelId } from '../../store/slices/channelSlice'
 import useApi from '../../hooks/useApi';
 
 const AddModal = () => {
-  const notify = () => toast("Wow so easy!");
   const channels = useSelector((state) => state.channels.channels);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -32,7 +31,7 @@ const AddModal = () => {
       name: Yup
         .string()
         .min(3, 'Минимум 3 символа')
-        .notOneOf(channels.map((channel) => channel.name))
+        .notOneOf(channels.map((channel) => channel.name), 'addModal.validation.unique')
         .required('Обязательное поле'),
     }),
 
@@ -48,7 +47,7 @@ const AddModal = () => {
         dispatch(hideModal());
         toast.success(t('addModal.success'), { icon: '🚀' });
       } catch (err) {
-        toast.error(t('errors.unknown'));
+        toast.error(t('errors.unknown'), { icon: '🚩' });
         console.error(err);
       }
     },
@@ -94,7 +93,6 @@ const AddModal = () => {
             className="m-1"
             variant="primary"
             type="submit"
-            onClick={() => notify()}
           >
             {t('addModal.send')}
           </Button>

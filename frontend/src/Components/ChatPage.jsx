@@ -7,8 +7,13 @@ import Spinner from 'react-bootstrap/Spinner';
 import Channels from "./Channels";
 import Messages from "./Messages";
 import getModal from './modals/index';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ChatPage = () => {
+  const notify = () => toast("Wow so easy!");
+
+
     const dispatch = useDispatch()
     const { getAuthHeaders } = useAuth()
     const loading = useSelector((state) => state.channels.loading)
@@ -45,6 +50,7 @@ const ChatPage = () => {
       <Row className="">
         <Channels/>
         <Messages/>
+        <ToastContainer />
       </Row>
       {renderModal(modalType)}
     </Container>

@@ -5,6 +5,7 @@ import { hideModal } from '../../store/slices/modalsSlice';
 import useApi from '../../hooks/useApi';
 import Spinner from 'react-bootstrap/Spinner';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const RemoveModal = () => {
   const [sending, setSending] = useState(false);
@@ -17,9 +18,11 @@ const RemoveModal = () => {
     try {
       setSending(true);
       await chatApi.removeChannel({ id: channelId });
+      toast.warning(t('removeModal.success'), { icon: '🔥' });
       dispatch(hideModal());
       setSending(false);
     } catch (err) {
+      toast.error(t('errors.unknown'), { icon: '🚩' });
       console.error(err);
       setSending(false);
     }

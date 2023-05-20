@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { hideModal } from '../../store/slices/modalsSlice';
 import useApi from '../../hooks/useApi';
 import Spinner from 'react-bootstrap/Spinner';
-
+import { toast } from 'react-toastify';
 
 const RenameModal = () => {
   const { t } = useTranslation();
@@ -39,8 +39,10 @@ const RenameModal = () => {
     onSubmit: async (values) => {
       try {
         await chatApi.renameChannel({ id: channelId, name: values.name });
+        toast.info(t('renameModal.success'), { icon: '✏️' });
         dispatch(hideModal());
       } catch (err) {
+        toast.error(t('errors.unknown'), { icon: '🚩' });
         console.error(err);
       }
     },
