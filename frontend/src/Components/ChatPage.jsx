@@ -5,14 +5,12 @@ import { useEffect } from "react";
 import { fetchData } from "../store/slices/fetchData";
 import Spinner from 'react-bootstrap/Spinner';
 import Channels from "./Channels";
-import Messages from "./Messages";
+import Messages from "./Messages/Messages";
 import getModal from './modals/index';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ChatPage = () => {
-  const notify = () => toast("Wow so easy!");
-
 
     const dispatch = useDispatch()
     const { getAuthHeaders } = useAuth()
