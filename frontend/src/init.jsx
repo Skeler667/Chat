@@ -1,4 +1,6 @@
 import i18next from 'i18next';
+import Rollbar from 'rollbar';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -34,18 +36,30 @@ const init = async (socket) => {
       resources,
       fallbackLng: 'ru',
     });
+
+  const rollbarConfig = {
+    accessToken: process.env.REACT_APP_ROLLBAR,
+    environment: 'production',
+  };
+
+  const rollbar = new Rollbar(rollbarConfig);
+
   return (
-    <React.StrictMode>
-      <BrowserRouter>
-        <Provider store={store}>
-          <I18nextProvider i18n={i18n}>
-            <ApiProvider socket={socket}>
-              <App />
-            </ApiProvider>
-          </I18nextProvider>
-        </Provider>
-      </BrowserRouter>
-    </React.StrictMode>
+    <RollbarProvider config={rollbar}>
+      <ErrorBoundary>
+        <React.StrictMode>
+          <BrowserRouter>
+            <Provider store={store}>
+              <I18nextProvider i18n={i18n}>
+                <ApiProvider socket={socket}>
+                  <App />
+                </ApiProvider>
+              </I18nextProvider>
+            </Provider>
+          </BrowserRouter>
+        </React.StrictMode>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 };
 export default init;
