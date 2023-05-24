@@ -19,7 +19,7 @@ const MessagesBox = ({ currentMessages }) => {
     ));
 
   return (
-    <div id="messages-box" className="chat-messages overflow-auto px-5 ">
+    <div id="messages-box" className="chat-messages overflow-auto px-5" style={{ height: '50vh' }}>
       {renderMessages()}
       <span ref={scrollTrigger} />
     </div>

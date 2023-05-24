@@ -15,7 +15,7 @@ const Messages = () => {
     .find((channel) => channel.id === currentChannelId);
 
   return (
-    <Col className="col p-0 h-100">
+    <Col className="p-0 h-100">
       <div className="d-flex flex-column h-100">
         <MessagesHeader currentMessages={currentMessages} currentChannel={currentChannel} />
         <MessagesBox currentMessages={currentMessages} />

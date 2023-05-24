@@ -10,17 +10,15 @@ import Header from './Components/Header';
 
 const App = () => (
   <AuthProvider>
-    <div className="d-flex flex-column h-100">
-      <Header />
-      <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<ChatPage />} />
-        </Route>
-        <Route path="login" element={<LoginPage />} />
-        <Route path="signup" element={<SignUpPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </div>
+    <Header />
+    <Routes>
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<ChatPage />} />
+      </Route>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="signup" element={<SignUpPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   </AuthProvider>
 );
 
