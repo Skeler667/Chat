@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Form, Button } from 'react-bootstrap';
+import { BsFillSendFill } from 'react-icons/bs';
 import * as Yup from 'yup';
 import leoProfanity from 'leo-profanity';
 import useApi from '../../hooks/useApi';
-import { BsFillSendFill } from 'react-icons/bs';
-import { useAuth } from '../../hooks/useAuth.hook';
+import useAuth from '../../hooks/useAuth.hook';
 
 const MessagesForm = () => {
   leoProfanity.loadDictionary('ru');
@@ -74,7 +74,7 @@ const MessagesForm = () => {
             disabled={!formik.values.body}
             className="btn btn-group-vertical"
           >
-            <BsFillSendFill/>
+            <BsFillSendFill />
             <span className="visually-hidden">
               {t('messages.send')}
             </span>

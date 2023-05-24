@@ -6,10 +6,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+import Spinner from 'react-bootstrap/Spinner';
 import { hideModal } from '../../store/slices/modalsSlice';
 import useApi from '../../hooks/useApi';
-import Spinner from 'react-bootstrap/Spinner';
-import { toast } from 'react-toastify';
 
 const RenameModal = () => {
   const { t } = useTranslation();

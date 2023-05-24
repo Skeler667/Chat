@@ -5,21 +5,23 @@ import ChatPage from './Components/ChatPage';
 import NotFoundPage from './Components/NotFoundPage';
 import PrivateRoute from './Components/PrivateRoute';
 import SignUpPage from './Components/SignUpPage';
-import { AuthProvider } from './Components/AuthProvider';
+import AuthProvider from './Components/AuthProvider';
 import Header from './Components/Header';
 
 const App = () => (
-    <AuthProvider>
-      <Header/>
-        <Routes>
-            <Route element={<PrivateRoute/>}>
-              <Route path='/' element={<ChatPage/>} />
-            </Route>
-              <Route path='login' element={<LoginPage/>} />
-              <Route path='signup' element={<SignUpPage/>} />
-              <Route path="*" element={<NotFoundPage/>} />
-        </Routes>
-    </AuthProvider>
-  );
+  <AuthProvider>
+    <div className="d-flex flex-column h-100">
+      <Header />
+      <Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<ChatPage />} />
+        </Route>
+        <Route path="login" element={<LoginPage />} />
+        <Route path="signup" element={<SignUpPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </div>
+  </AuthProvider>
+);
 
 export default App;

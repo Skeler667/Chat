@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { hideModal } from '../../store/slices/modalsSlice';
-import { setCurrentChannelId } from '../../store/slices/channelSlice'
+import { setCurrentChannelId } from '../../store/slices/channelSlice';
 import useApi from '../../hooks/useApi';
 
 const AddModal = () => {
@@ -77,7 +77,7 @@ const AddModal = () => {
               && <FormText className="feedback text-danger mt-3">{t(formik.errors.name)}</FormText>
             }
             <Form.Label className="visually-hidden">
-            {t('addModal.channelName')}
+              {t('addModal.channelName')}
             </Form.Label>
           </Form.Group>
           <Button

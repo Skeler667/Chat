@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Modal } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { hideModal } from '../../store/slices/modalsSlice';
 import useApi from '../../hooks/useApi';
-import Spinner from 'react-bootstrap/Spinner';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 
 const RemoveModal = () => {
   const [sending, setSending] = useState(false);
