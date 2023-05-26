@@ -10,7 +10,6 @@ import useApi from '../../hooks/useApi';
 import useAuth from '../../hooks/useAuth.hook';
 
 const MessagesForm = () => {
-  leoProfanity.loadDictionary('ru');
   const { user } = useAuth();
   const chatApi = useApi();
   const { currentChannelId } = useSelector((state) => state.channels);

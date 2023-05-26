@@ -12,6 +12,7 @@ import store from './store/store';
 import ApiProvider from './Components/ApiProvider';
 import { addMessage } from './store/slices/messagesSlice';
 import { addChannel, removeChannel, renameChannel } from './store/slices/channelSlice';
+import leoProfanity from 'leo-profanity';
 
 const init = async (socket) => {
   socket.on('newMessage', (payload) => {
@@ -36,6 +37,10 @@ const init = async (socket) => {
       resources,
       fallbackLng: 'ru',
     });
+
+  leoProfanity.clearList();
+  leoProfanity.add(leoProfanity.getDictionary('ru'));
+  leoProfanity.add(leoProfanity.getDictionary('en'));
 
   const rollbarConfig = {
     accessToken: process.env.REACT_APP_ROLLBAR,
