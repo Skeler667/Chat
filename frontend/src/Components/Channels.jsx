@@ -18,7 +18,7 @@ const Channels = () => {
     dispatch(setCurrentChannelId(id));
   };
   return (
-    <Col className="col-2 border-right">
+    <Col className="border-end col-3">
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
         <b>
           {t('channels.title')}

@@ -42,15 +42,17 @@ const ChatPage = () => {
   }
 
   return (
-    <div className="container h-100 my-4 overflow-hidden rounded shadow">
-      <Container className="row h-100 bg-white flex-md-row">
-        <Row>
-          <Channels />
-          <Messages />
-          <ToastContainer />
-        </Row>
-        {renderModal(modalType)}
-      </Container>
+    <div className="h-100">
+      <div className="d-flex flex-column h-100">
+        <Container className="h-100 my-4 overflow-hidden rounded shadow">
+          <Row className="h-100 bg-white flex-md-row">
+            <Channels />
+            <Messages />
+            <ToastContainer />
+          </Row>
+          {renderModal(modalType)}
+        </Container>
+      </div>
     </div>
   );
 };
