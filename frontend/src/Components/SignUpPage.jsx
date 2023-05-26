@@ -58,7 +58,7 @@ const SignUpPage = () => {
       }
     },
   });
-
+  console.log(formik.errors.name);
   return (
     <Container>
       <Row>
@@ -76,7 +76,8 @@ const SignUpPage = () => {
                   onChange={formik.handleChange('name')}
                 />
               </FloatingLabel>
-              {formik.errors.name && formik.touched.name && (<Form.Text className="text-danger">{t(formik.errors.username)}</Form.Text>)}
+
+              {formik.errors.name && formik.touched.name && (<Form.Text className="text-danger">{t('signup.validation.usernameLength')}</Form.Text>)}
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -91,7 +92,7 @@ const SignUpPage = () => {
                   onChange={formik.handleChange('password')}
                 />
               </FloatingLabel>
-              {formik.errors.password && formik.touched.password && (<Form.Text className="text-danger">{t(formik.errors.password)}</Form.Text>)}
+              {formik.errors.password && formik.touched.password && (<Form.Text className="text-danger">{t('signup.validation.passwordLength')}</Form.Text>)}
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -108,7 +109,7 @@ const SignUpPage = () => {
               {
                   (formik.errors.confirmPassword
                     && formik.touched.confirmPassword
-                    && <FormText className="feedback text-danger mt-3">{t(formik.errors.confirmPassword)}</FormText>)
+                    && <FormText className="feedback text-danger mt-3">{t('signup.validation.mustMatch')}</FormText>)
                     || <FormText className="feedback text-danger mt-3">{t(signUpError)}</FormText>
                 }
             </Form.Group>
