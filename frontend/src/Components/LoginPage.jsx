@@ -65,7 +65,7 @@ const LoginPage = () => {
                 && formik.touched.username
                 && <FormText className="feedback text-danger mt-3">{t(formik.errors.username)}</FormText>
               }
-              <FormText className="feedback text-danger mt-3">{t(authError)}</FormText>
+              <FormText className="feedback text-danger mt-3">{authError}</FormText>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -85,7 +85,7 @@ const LoginPage = () => {
                   && formik.touched.password
                   && <FormText className="feedback text-danger mt-3">{t(formik.errors.password)}</FormText>
                 }
-              <FormText className="feedback text-danger mt-3">{t(authError)}</FormText>
+              <FormText className="feedback text-danger mt-3">{authError}</FormText>
 
             </Form.Group>
             <div className="d-grid gap-2">
