@@ -11,4 +11,4 @@ deploy:
 	git push heroku main
 
 start:
-	npx make start-frontend
+	make start-frontend
