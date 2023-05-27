@@ -13,12 +13,14 @@ const messagesSlice = createSlice({
       state.messages.push(action.payload);
     },
     setMessages(state, action) {
-      state.messages = action.payload;
+      const storage = state;
+      storage.messages = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchData.fulfilled, (state, action) => {
-      state.messages = action.payload.messages;
+      const storage = state;
+      storage.messages = action.payload.messages;
     });
     // builder.addCase(fetchData.rejected, (state, action) => {
     //   state.channels = action.payload.channels

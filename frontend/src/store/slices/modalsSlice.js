@@ -11,12 +11,14 @@ const modalsSlice = createSlice({
   reducers: {
     showModal: (state, action) => {
       const { modalType, channelId } = action.payload;
-      state.modalType = modalType;
-      state.channelId = channelId;
+      const storage = state;
+      storage.modalType = modalType;
+      storage.channelId = channelId;
     },
     hideModal: (state) => {
-      state.modalType = null;
-      state.channelId = null;
+      const storage = state;
+      storage.modalType = null;
+      storage.channelId = null;
     },
   },
 });
