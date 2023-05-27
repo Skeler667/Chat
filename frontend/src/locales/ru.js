@@ -38,6 +38,7 @@ const ru = {
       title: 'Каналы',
       remove: 'Удалить',
       rename: 'Переименовать',
+      plus: '+',
     },
     messages: {
       new: 'Новое сообщение',
