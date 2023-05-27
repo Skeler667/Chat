@@ -7,8 +7,8 @@ import {
   Container, Button, Form, Row, Col, FormText,
 } from 'react-bootstrap';
 import axios from 'axios';
-import useAuth from '../hooks/useAuth.hook';
 import Spinner from 'react-bootstrap/Spinner';
+import useAuth from '../hooks/useAuth.hook';
 
 const LoginPage = () => {
   const { t } = useTranslation();

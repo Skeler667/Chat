@@ -5,6 +5,7 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import React from 'react';
+import leoProfanity from 'leo-profanity';
 import App from './App';
 import resources from './locales/index.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +13,6 @@ import store from './store/store';
 import ApiProvider from './Components/ApiProvider';
 import { addMessage } from './store/slices/messagesSlice';
 import { addChannel, removeChannel, renameChannel } from './store/slices/channelSlice';
-import leoProfanity from 'leo-profanity';
 
 const init = async (socket) => {
   socket.on('newMessage', (payload) => {
