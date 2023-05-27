@@ -76,7 +76,7 @@ const AddModal = () => {
               && formik.touched.name
               && <FormText className="feedback text-danger mt-3">{t(formik.errors.name)}</FormText>
             }
-            <Form.Label className="visually-hidden">
+            <Form.Label className="visually-hidden" for="name">
               {t('addModal.channelName')}
             </Form.Label>
           </Form.Group>
