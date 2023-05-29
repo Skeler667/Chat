@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
 import SocketContext from '../context/SocketContext';
 
-// import from slice channels !!
-
 const ApiProvider = ({ children, socket }) => {
   const withAcknowledgement = (socketFunc) => (...args) => new Promise((resolve, reject) => {
     let state = 'pending'; // eslint-disable-line
@@ -17,6 +15,7 @@ const ApiProvider = ({ children, socket }) => {
       clearTimeout(timer);
 
       if (response.status === 'ok') {
+        console.log('ok')
         state = 'resolved';
         resolve(response.data);
       }

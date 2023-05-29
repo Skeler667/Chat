@@ -5,7 +5,6 @@ import {
   Col, Dropdown, ButtonGroup, Nav,
 } from 'react-bootstrap';
 import cn from 'classnames';
-// import { BsFillPlusSquareFill } from 'react-icons/bs';
 import { setCurrentChannelId } from '../store/slices/channelSlice';
 import { showModal } from '../store/slices/modalsSlice';
 
@@ -18,7 +17,7 @@ const Channels = () => {
     dispatch(setCurrentChannelId(id));
   };
   return (
-    <Col className="border-end col-3">
+    <Col className="col-4 col-md-2 border-end px-0 bg-light flex-column d-flex overflow-auto" style={{ height: '88vh' }}>
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
         <b>
           {t('channels.title')}
@@ -47,11 +46,10 @@ const Channels = () => {
         const style = cn('btn', {
           'btn-secondary': channel.id === currentIdChannel,
         });
-
         return channel.removable
           ? (
             <Nav.Item key={channel.id}>
-              <div role="group" className="d-flex dropdown btn-group">
+              <div role="group" className="nav flex-column nav-pills nav-fill px-2 h-100 d-block">
                 <Dropdown as={ButtonGroup} className="w-100">
                   <button onClick={() => changeChannel(channel.id)} className={`w-100 rounded-0 text-start text-truncate btn ${style}`} type="button">
                     <span className="me-1">#</span>

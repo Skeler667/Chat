@@ -79,7 +79,7 @@ const RenameModal = () => {
               && <FormText className="feedback text-danger mt-3">{t(formik.errors.name)}</FormText>
             }
           </Form.Group>
-          <div>
+          <div className="d-flex justify-content-between">
             <Button
               className="m-1"
               role="button"

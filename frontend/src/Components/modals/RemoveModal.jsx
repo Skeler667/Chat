@@ -35,7 +35,7 @@ const RemoveModal = () => {
       </Modal.Header>
       <Modal.Body>
         <p className="lead">{t('removeModal.confirm')}</p>
-        <div>
+        <div className="d-flex justify-content-between">
           <Button
             className="m-1"
             variant="secondary"

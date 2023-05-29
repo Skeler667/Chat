@@ -80,22 +80,24 @@ const AddModal = () => {
               {t('addModal.channelName')}
             </Form.Label>
           </Form.Group>
-          <Button
-            role="button"
-            className="m-1"
-            variant="secondary"
-            onClick={() => dispatch(hideModal())}
-          >
-            {t('addModal.cancel')}
-          </Button>
-          <Button
-            role="button"
-            className="m-1"
-            variant="primary"
-            type="submit"
-          >
-            {t('addModal.send')}
-          </Button>
+          <div className="d-flex justify-content-between">
+            <Button
+              role="button"
+              className="m-1"
+              variant="secondary"
+              onClick={() => dispatch(hideModal())}
+            >
+              {t('addModal.cancel')}
+            </Button>
+            <Button
+              role="button"
+              className="m-1"
+              variant="primary"
+              type="submit"
+            >
+              {t('addModal.send')}
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

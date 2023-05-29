@@ -42,12 +42,13 @@ const MessagesForm = () => {
         formik.resetForm();
       } catch (error) {
         console.error(error);
+        console.log('MessagesForm рizdec');
       }
     },
   });
 
   return (
-    <div className="mt-auto px-5 py-3">
+    <div className="px-5 py-3">
       <Form
         onSubmit={formik.handleSubmit}
         className="py-1 border rounded-2"
