@@ -5,15 +5,12 @@ import useAuth from '../../hooks/useAuth.hook';
 const fetchData = createAsyncThunk(
   'channels/fetchData',
   async (headers) => {
-    const { logOut } = useAuth;
-    try {
-      const response = await axios.get('/api/v1/data', headers)
-      return response.data;
-    } catch (error) {
+    const { logOut } = useAuth();
+    const response = await axios.get('/api/v1/data', headers);
+    if (response.status === '401') {
       logOut();
-      console.error(error);
-      console.log('error');
     }
+    return response.data;
   },
 );
 export default fetchData;
