@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/Skeler667/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/Skeler667/frontend-project-12/actions)
 <a href="https://codeclimate.com/github/Skeler667/Chat/maintainability"><img src="https://api.codeclimate.com/v1/badges/c777e5c44cc84eba2aac/maintainability" /></a>
 
-# Simple web application - analogue of Slack chat
+# Chat App
 
 # Stak technologies used:
 
@@ -16,6 +16,9 @@
 - vercel deploy
 - Rollbar
 - i18next
+
+# System Requirements
+node v16.0.1 and higher
 
 # Install
 
@@ -33,3 +36,6 @@ run app localy
 ```
 make start
 ```
+Demo:
+
+https://chat-sepia-delta.vercel.app/
