@@ -22,7 +22,6 @@ const ChatPage = () => {
     const getData = async () => {
       const headers = getAuthHeaders();
       dispatch(fetchData(headers))
-        .unwrap()
         .catch((e) => {
           if (e.status === 401) {
             logOut();
