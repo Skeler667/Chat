@@ -21,7 +21,9 @@ const ChatPage = () => {
   useEffect(() => {
     const getData = async () => {
       const headers = getAuthHeaders();
+      console.log(fetchData(headers));
       dispatch(fetchData(headers))
+        .unwrap()
         .catch((e) => {
           if (e.status === 401) {
             logOut();
@@ -52,7 +54,6 @@ const ChatPage = () => {
         <Spinner
           animation="border"
           variant="primary"
-            // style={{ width: '5rem', height: '5rem', marginTop:'250px' }}
           className="justify-self-center lg h-3 mt-5 w-5"
         />
       </div>
