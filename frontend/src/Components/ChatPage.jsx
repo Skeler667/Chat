@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
 import { useEffect } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
 import useAuth from '../hooks/useAuth.hook';
 import fetchData from '../store/slices/fetchData';
@@ -9,16 +9,35 @@ import Channels from './Channels';
 import Messages from './Messages/Messages';
 import getModal from './modals/index';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
-  const { getAuthHeaders } = useAuth();
+  const { getAuthHeaders, logOut } = useAuth();
   const loading = useSelector((state) => state.channels.loading);
   const modalType = useSelector((state) => state.modals.modalType);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch(fetchData(getAuthHeaders()));
-  }, [dispatch, getAuthHeaders]);
+    const getData = async () => {
+      const headers = getAuthHeaders();
+      dispatch(fetchData(headers))
+        .unwrap()
+        .catch((e) => {
+          if (e.status === 401) {
+            logOut();
+          }
+          if (!e.isAxiosError) {
+            toast.error(t('errors.unknown'));
+            return;
+          }
+          if (e.isAxiosError) {
+            toast.error(t('errors.network'));
+          }
+        });
+    };
+    getData();
+  }, [dispatch, getAuthHeaders, logOut, t]);
 
   const renderModal = (type) => {
     if (!type) {
