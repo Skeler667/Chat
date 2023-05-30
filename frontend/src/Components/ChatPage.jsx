@@ -3,13 +3,13 @@ import { Container, Row } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import Spinner from 'react-bootstrap/Spinner';
+import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/useAuth.hook';
 import fetchData from '../store/slices/fetchData';
 import Channels from './Channels';
 import Messages from './Messages/Messages';
 import getModal from './modals/index';
 import 'react-toastify/dist/ReactToastify.css';
-import { useTranslation } from 'react-i18next';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
