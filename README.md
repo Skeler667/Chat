@@ -16,6 +16,8 @@
 - vercel deploy
 - Rollbar
 - i18next
+- Toastify
+- LeoProfanity
 
 # System Requirements
 node v16.0.1 and higher
