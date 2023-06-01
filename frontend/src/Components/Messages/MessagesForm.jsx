@@ -42,7 +42,6 @@ const MessagesForm = () => {
         formik.resetForm();
       } catch (error) {
         console.error(error);
-        console.log('MessagesForm рizdec');
       }
     },
   });
