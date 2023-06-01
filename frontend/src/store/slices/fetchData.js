@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { getData } from '../../untils/api';
 
 const fetchData = createAsyncThunk(
   'channels/fetchData',
   async (headers, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/api/v1/data', headers);
+      const response = await getData(headers);
       const { data } = response;
       return data;
     } catch (err) {

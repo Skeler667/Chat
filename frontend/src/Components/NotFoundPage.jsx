@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import routes from '../untils/routes';
 
 const NotFoundPage = () => {
   const { t } = useTranslation();
@@ -12,7 +13,7 @@ const NotFoundPage = () => {
         height="150px"
       />
       <h1>{t('notFoundPage.title')}</h1>
-      <Link className="text-decoration-none" to="/" style={{ color: 'black' }}>{t('notFoundPage.link')}</Link>
+      <Link className="text-decoration-none" to={routes.home} style={{ color: 'black' }}>{t('notFoundPage.link')}</Link>
     </div>
   );
 };

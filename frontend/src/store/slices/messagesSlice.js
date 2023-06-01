@@ -22,9 +22,6 @@ const messagesSlice = createSlice({
       const storage = state;
       storage.messages = action.payload.messages;
     });
-    // builder.addCase(fetchData.rejected, (state, action) => {
-    //   state.channels = action.payload.channels
-    // })
   },
 });
 

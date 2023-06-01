@@ -8,8 +8,9 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import axios from 'axios';
 import useAuth from '../hooks/useAuth.hook';
+import routes from '../untils/routes';
+import { addSignUp } from '../untils/api';
 
 const SignUpPage = () => {
   const { t } = useTranslation();
@@ -47,10 +48,9 @@ const SignUpPage = () => {
           username: values.name,
           password: values.password,
         };
-        const response = await axios.post('/api/v1/signup', userData);
-        console.log(response.data);
+        const response = await addSignUp(userData);
         logIn(response.data);
-        navigate('/');
+        navigate(routes.home);
       } catch (error) {
         const { status } = error.response;
         const message = status === 409 && 'signup.validation.alreadyExists';
@@ -120,7 +120,7 @@ const SignUpPage = () => {
               </Button>
               <p className="mt-3">
                 {t('signup.hasAccount')}
-                <Link style={{ marginLeft: 5 }} to="/login">{t('login.title')}</Link>
+                <Link style={{ marginLeft: 5 }} to={routes.login}>{t('login.title')}</Link>
               </p>
             </div>
           </Form>

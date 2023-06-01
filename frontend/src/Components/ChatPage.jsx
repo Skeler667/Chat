@@ -10,9 +10,12 @@ import Channels from './Channels';
 import Messages from './Messages/Messages';
 import getModal from './modals/index';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import routes from '../untils/routes';
 
 const ChatPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { getAuthHeaders, logOut } = useAuth();
   const loading = useSelector((state) => state.channels.loading);
   const modalType = useSelector((state) => state.modals.modalType);
@@ -22,11 +25,13 @@ const ChatPage = () => {
     const getData = async () => {
       const headers = getAuthHeaders();
       console.log(fetchData(headers));
+      console.log('123e12qwqfr523t56');
       dispatch(fetchData(headers))
         .unwrap()
         .catch((e) => {
           if (e.status === 401) {
             logOut();
+            navigate(routes.login);
           }
           if (!e.isAxiosError) {
             toast.error(t('errors.unknown'));
@@ -38,7 +43,7 @@ const ChatPage = () => {
         });
     };
     getData();
-  }, [dispatch, getAuthHeaders, logOut, t]);
+  }, [dispatch, getAuthHeaders, logOut, t, navigate]);
 
   const renderModal = (type) => {
     if (!type) {

@@ -6,9 +6,10 @@ import { useTranslation } from 'react-i18next';
 import {
   Container, Button, Form, Row, Col, FormText,
 } from 'react-bootstrap';
-import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
 import useAuth from '../hooks/useAuth.hook';
+import routes from '../untils/routes';
+import { setLogin } from '../untils/api';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -32,9 +33,9 @@ const LoginPage = () => {
     },
     onSubmit: async (values) => {
       try {
-        const response = await axios.post('/api/v1/login', values);
+        const response = await setLogin(values);
         logIn(response.data);
-        navigate('/');
+        navigate(routes.home);
       } catch (error) {
         const { statusText } = error.response;
         const message = statusText === 'Unauthorized' && 'login.validation.failed';
@@ -102,7 +103,7 @@ const LoginPage = () => {
           </Form>
           <p className="mt-3">
             {t('login.hasAccount')}
-            <Link style={{ marginLeft: 5 }} to="/signup">{t('signup.title')}</Link>
+            <Link style={{ marginLeft: 5 }} to={routes.signup}>{t('signup.title')}</Link>
           </p>
         </Col>
       </Row>
