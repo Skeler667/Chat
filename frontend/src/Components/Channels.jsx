@@ -17,7 +17,7 @@ const Channels = () => {
     scrollTrigger.current.scrollIntoView({
       behaivor: 'smooth',
     });
-  }, [currentIdChannel]);
+  });
   const { t } = useTranslation();
   const changeChannel = (id) => {
     dispatch(setCurrentChannelId(id));
