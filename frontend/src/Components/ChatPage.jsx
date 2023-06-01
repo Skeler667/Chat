@@ -24,8 +24,6 @@ const ChatPage = () => {
   useEffect(() => {
     const getData = async () => {
       const headers = getAuthHeaders();
-      console.log(fetchData(headers));
-      console.log('123e12qwqfr523t56');
       dispatch(fetchData(headers))
         .unwrap()
         .catch((e) => {
