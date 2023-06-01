@@ -20,7 +20,7 @@
 - LeoProfanity
 
 # System Requirements
-node v16.0.1 and higher
+node v16
 
 # Install
 
