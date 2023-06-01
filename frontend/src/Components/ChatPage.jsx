@@ -35,10 +35,14 @@ const ChatPage = () => {
           }
           if (!e.isAxiosError) {
             toast.error(t('errors.unknown'));
+            logOut();
+            navigate(routes.login);
             return;
           }
           if (e.isAxiosError) {
             toast.error(t('errors.network'));
+            logOut();
+            navigate(routes.login);
           }
         });
     };
