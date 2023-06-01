@@ -1,6 +1,7 @@
 ### Hexlet tests and code climate status:
 [![Actions Status](https://github.com/Skeler667/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/Skeler667/frontend-project-12/actions)
 <a href="https://codeclimate.com/github/Skeler667/Chat/maintainability"><img src="https://api.codeclimate.com/v1/badges/c777e5c44cc84eba2aac/maintainability" /></a>
+![Eslint Status](https://github.com/Skeler667/Chat/actions/workflows/eslint.yml/badge.svg)
 
 # Chat App
 
