@@ -44,7 +44,7 @@ const init = async (socket) => {
 
   const rollbarConfig = {
     accessToken: process.env.REACT_APP_ROLLBAR,
-    environment: 'production',
+    environment: process.env.NODE_ENV,
   };
 
   const rollbar = new Rollbar(rollbarConfig);

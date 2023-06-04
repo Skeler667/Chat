@@ -31,9 +31,9 @@ const RenameModal = () => {
     validationSchema: Yup.object({
       name: Yup
         .string()
-        .min(3, 'Минимум 3 символа')
-        .notOneOf(channels.map((channel) => channel.name), 'Имя канала должно быть уникальным')
-        .required('Обязательное поле'),
+        .min(3, 'renameModal.validation.length')
+        .notOneOf(channels.map((channel) => channel.name), 'renameModal.validation.unique')
+        .required('renameModal.validation.required'),
     }),
 
     onSubmit: async (values) => {
