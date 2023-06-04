@@ -7,7 +7,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import SignUpPage from './Components/SignUpPage';
 import AuthProvider from './Components/AuthProvider';
 import Header from './Components/Header';
-import routes from './untils/routes';
+import routes from './utils/routes';
 
 const App = () => (
   <AuthProvider>

@@ -11,7 +11,7 @@ import Channels from './Channels';
 import Messages from './Messages/Messages';
 import getModal from './modals/index';
 import 'react-toastify/dist/ReactToastify.css';
-import routes from '../untils/routes';
+import routes from '../utils/routes';
 
 const ChatPage = () => {
   const dispatch = useDispatch();

@@ -8,8 +8,8 @@ import {
 } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import useAuth from '../hooks/useAuth.hook';
-import routes from '../untils/routes';
-import { setLogin } from '../untils/api';
+import routes from '../utils/routes';
+import { setLogin } from '../utils/api';
 
 const LoginPage = () => {
   const { t } = useTranslation();

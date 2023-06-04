@@ -6,8 +6,6 @@ const DEFAULT_CHANNEL_ID = 1;
 const initialState = {
   channels: [],
   currentChannelId: DEFAULT_CHANNEL_ID,
-  error: null,
-  loading: false,
 };
 
 const channelSlice = createSlice({

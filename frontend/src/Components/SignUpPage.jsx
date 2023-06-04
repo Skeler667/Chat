@@ -9,8 +9,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import useAuth from '../hooks/useAuth.hook';
-import routes from '../untils/routes';
-import { addSignUp } from '../untils/api';
+import routes from '../utils/routes';
+import { addSignUp } from '../utils/api';
 
 const SignUpPage = () => {
   const { t } = useTranslation();

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getData } from '../../untils/api';
+import { getData } from '../../utils/api';
 
 const fetchData = createAsyncThunk(
   'channels/fetchData',
