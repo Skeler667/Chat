@@ -7,17 +7,18 @@ import PrivateRoute from './Components/PrivateRoute';
 import SignUpPage from './Components/SignUpPage';
 import AuthProvider from './Components/AuthProvider';
 import Header from './Components/Header';
+import routes from './untils/routes';
 
 const App = () => (
   <AuthProvider>
     <Header />
     <Routes>
       <Route element={<PrivateRoute />}>
-        <Route path="/" element={<ChatPage />} />
+        <Route path={routes.home} element={<ChatPage />} />
       </Route>
-      <Route path="login" element={<LoginPage />} />
-      <Route path="signup" element={<SignUpPage />} />
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path={routes.login} element={<LoginPage />} />
+      <Route path={routes.signup} element={<SignUpPage />} />
+      <Route path={routes.error} element={<NotFoundPage />} />
     </Routes>
   </AuthProvider>
 );
