@@ -30,9 +30,9 @@ const AddModal = () => {
     validationSchema: Yup.object({
       name: Yup
         .string()
-        .min(3, 'Минимум 3 символа')
+        .min(3, 'addModal.validation.length')
         .notOneOf(channels.map((channel) => channel.name), 'addModal.validation.unique')
-        .required('Обязательное поле'),
+        .required('addModal.validation.required'),
     }),
 
     onSubmit: async (values) => {
@@ -60,7 +60,7 @@ const AddModal = () => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-3">
             <Form.Control
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -76,7 +76,7 @@ const AddModal = () => {
               && formik.touched.name
               && <FormText className="feedback text-danger mt-3">{t(formik.errors.name)}</FormText>
             }
-            <Form.Label className="visually-hidden" for="name">
+            <Form.Label className="visually-hidden" htmlFor="name">
               {t('addModal.channelName')}
             </Form.Label>
           </Form.Group>

@@ -58,7 +58,6 @@ const SignUpPage = () => {
       }
     },
   });
-  console.log(formik.errors.name);
   return (
     <Container>
       <Row>
