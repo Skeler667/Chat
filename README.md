@@ -12,6 +12,7 @@
 - React Bootstrap
 - Redux Toolkit
 - REST API
+- Socket.io
 - WebSocket
 - Webpack
 - vercel deploy
