@@ -9,10 +9,8 @@ import leoProfanity from 'leo-profanity';
 import useApi from '../../hooks/useApi';
 import useAuth from '../../hooks/useAuth.hook';
 
-import icon from '../../deployparrot.gif'
+import icon from '../../deployparrot.gif';
 import EmojiPicker from 'emoji-picker-react';
-
-
 
 const MessagesForm = () => {
   const { user } = useAuth();
@@ -20,6 +18,7 @@ const MessagesForm = () => {
   const { currentChannelId } = useSelector((state) => state.channels);
   const inputEl = useRef();
   const { t } = useTranslation();
+  const [chosenEmoji, setChosenEmoji] = useState('1');
 
   useEffect(() => {
     inputEl.current.focus();
@@ -45,9 +44,8 @@ const MessagesForm = () => {
       try {
         await chatApi.sendMessage(messageData);
         formik.values.body = '';
-        setChosenEmoji('')
+        setChosenEmoji('');
         formik.resetForm();
-        
       } catch (error) {
         console.error(error);
       }
@@ -55,16 +53,12 @@ const MessagesForm = () => {
   });
 
   const [isOpen, setOpen] = useState(false);
-  // const onEmojiClick = ({ emoji }) => setMessage(`${message} ${emoji}`);
-
-const [chosenEmoji, setChosenEmoji] = useState('1');
-  const onEmojiClick = (event, emojiObject) => { 
-    // setChosenEmoji(emojiObject.emoji)
-    console.log(emojiObject.emoji)
-    setChosenEmoji(...formik.values.body += emojiObject.emoji)
-    formik.setFieldValue('formik.values.body', chosenEmoji, false) 
-    console.log(`current emoji: ${emojiObject.emoji}\n formik.values.body: ${formik.values.body}\n chosenEmoji: ${emojiObject.emoji}`)
-    setChosenEmoji('')
+  const onEmojiClick = (event, emojiObject) => {
+    console.log(emojiObject.emoji);
+    setChosenEmoji(...formik.values.body += emojiObject.emoji);
+    formik.setFieldValue('formik.values.body', chosenEmoji, false);
+    console.log(`current emoji: ${emojiObject.emoji}\n formik.values.body: ${formik.values.body}\n chosenEmoji: ${emojiObject.emoji}`);
+    setChosenEmoji('');
   };
 
   return (
@@ -103,14 +97,14 @@ const [chosenEmoji, setChosenEmoji] = useState('1');
       </Form>
       <span>
 
-<img src={icon} alt="" onClick={() => setOpen(!isOpen)} />
+        <img src={icon} alt="" onClick={() => setOpen(!isOpen)} />
 
-  {isOpen && (
-    <div>
-      <EmojiPicker preload onEmojiClick={onEmojiClick} />
-    </div>
-  )}
-</span>
+        {isOpen && (
+        <div>
+          <EmojiPicker preload onEmojiClick={onEmojiClick} />
+        </div>
+        )}
+      </span>
     </div>
   );
 };
