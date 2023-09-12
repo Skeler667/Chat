@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,11 @@ import * as Yup from 'yup';
 import leoProfanity from 'leo-profanity';
 import useApi from '../../hooks/useApi';
 import useAuth from '../../hooks/useAuth.hook';
+
+import icon from '../../deployparrot.gif'
+import EmojiPicker from 'emoji-picker-react';
+
+
 
 const MessagesForm = () => {
   const { user } = useAuth();
@@ -39,12 +44,28 @@ const MessagesForm = () => {
       };
       try {
         await chatApi.sendMessage(messageData);
+        formik.values.body = '';
+        setChosenEmoji('')
         formik.resetForm();
+        
       } catch (error) {
         console.error(error);
       }
     },
   });
+
+  const [isOpen, setOpen] = useState(false);
+  // const onEmojiClick = ({ emoji }) => setMessage(`${message} ${emoji}`);
+
+const [chosenEmoji, setChosenEmoji] = useState('1');
+  const onEmojiClick = (event, emojiObject) => { 
+    // setChosenEmoji(emojiObject.emoji)
+    console.log(emojiObject.emoji)
+    setChosenEmoji(...formik.values.body += emojiObject.emoji)
+    formik.setFieldValue('formik.values.body', chosenEmoji, false) 
+    console.log(`current emoji: ${emojiObject.emoji}\n formik.values.body: ${formik.values.body}\n chosenEmoji: ${emojiObject.emoji}`)
+    setChosenEmoji('')
+  };
 
   return (
     <div className="px-5 py-3">
@@ -80,6 +101,16 @@ const MessagesForm = () => {
           </Button>
         </Form.Group>
       </Form>
+      <span>
+
+<img src={icon} alt="" onClick={() => setOpen(!isOpen)} />
+
+  {isOpen && (
+    <div>
+      <EmojiPicker preload onEmojiClick={onEmojiClick} />
+    </div>
+  )}
+</span>
     </div>
   );
 };
