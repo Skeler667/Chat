@@ -23,15 +23,15 @@ const Channels = () => {
     dispatch(setCurrentChannelId(id));
   };
   return (
-    <Col className="col-4 col-md-2 border-end px-0 bg-light flex-column d-flex">
-      <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
+    <Col className="col-4 col-md-2 px-0 flex-column d-flex" style={{backgroundColor:'black', borderRight: '1px solid #212529'}}>
+      <div className="d-flex bg-dark justify-content-between ps-4 pe-2 p-4" style={{backgroundColor:'black', color: '#959cf8'}}>
         <b>
           {t('channels.title')}
         </b>
         <button
           onClick={() => dispatch(showModal({ modalType: 'adding', channelId: null }))}
           type="button"
-          className="p-0 text-primary btn btn-group-vertical"
+          className="p-0 text-info btn btn-group-vertical btn-dark btn-group-vertical"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,10 +49,11 @@ const Channels = () => {
         </button>
       </div>
 
-      <div className="overflow-auto" style={{ height: '78vh' }}>
+      <div className="overflow-auto" style={{ height: '78vh', backgroundColor:'black', color: '#959cf8' }}>
         { channels.map((channel) => {
           const style = cn('btn', {
-            'btn-secondary': channel.id === currentIdChannel,
+            'btn-outline-info': channel.id === currentIdChannel,
+            'btn-outline-secondary': channel.id !== currentIdChannel,
           });
           return channel.removable
             ? (
@@ -64,10 +65,10 @@ const Channels = () => {
                       {channel.name}
                     </button>
 
-                    <Dropdown.Toggle split variant="light" className={`${style}`} id="dropdown-split-basic">
+                    <Dropdown.Toggle split variant="dark" className={`${style}`} id="dropdown-split-basic">
                       <span className="visually-hidden">{t('renameModal.handlingChannel')}</span>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
+                    <Dropdown.Menu variant="dark">
                       <Dropdown.Item
                         onClick={() => dispatch(showModal({ modalType: 'renaming', channelId: channel.id }))}
                       >
