@@ -15,7 +15,7 @@ const MessagesBox = ({ currentMessages }) => {
       if (username === user.username) {
         return (
           <div key={id} className="text-break mb-2">
-            <b className="text-danger bg-dark p-1">{username}</b>
+            <b className="bg-dark p-1">{username}</b>
             :
             {' '}
             {body}
@@ -24,7 +24,7 @@ const MessagesBox = ({ currentMessages }) => {
       }
       return (
         <div key={id} className="text-break mb-2">
-          <b>{username}</b>
+          <b style={{color:'#959cf8'}}>{username}</b>
           :
           {' '}
           {body}

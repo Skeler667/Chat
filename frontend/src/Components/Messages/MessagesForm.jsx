@@ -65,7 +65,7 @@ const MessagesForm = () => {
     <div className="px-5 py-3">
       <Form
         onSubmit={formik.handleSubmit}
-        className="py-1 border rounded-2"
+        className="py-1"
       >
         <Form.Group className="input-group has-validation">
           <Form.Control
@@ -79,6 +79,7 @@ const MessagesForm = () => {
             disabled={formik.isSubmitting}
             placeholder={t('messages.input')}
             autoComplete="off"
+            style={{backgroundColor:'#212529', color: '#959cf8'}}
           />
           <Form.Label className="visually-hidden">
             {t('messages.new')}
@@ -86,7 +87,7 @@ const MessagesForm = () => {
           <Button
             type="submit"
             disabled={!formik.values.body}
-            className="btn btn-group-vertical"
+            className="btn-dark btn-group-vertical btn-outline-info"
           >
             <BsFillSendFill />
             <span className="visually-hidden">

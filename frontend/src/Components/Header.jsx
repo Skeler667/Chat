@@ -14,7 +14,7 @@ const Header = () => {
         <Navbar.Brand>
           <Link to={routes.home} className="text-white text-decoration-none">{t('chatHeader.title')}</Link>
         </Navbar.Brand>
-        { user && <Button onClick={logOut}>{t('chatHeader.logOut')}</Button>}
+        { user && <Button className='btn-dark btn-group-vertical btn-outline-info' onClick={logOut}>{t('chatHeader.logOut')}</Button>}
       </Container>
     </Navbar>
   );
