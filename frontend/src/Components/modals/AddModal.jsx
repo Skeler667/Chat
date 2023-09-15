@@ -45,24 +45,31 @@ const AddModal = () => {
         const response = await chatApi.addChannel(channelData);
         dispatch(setCurrentChannelId(response.id));
         dispatch(hideModal());
-        toast.success(t('addModal.success'), { icon: '🚀' });
+        toast.success(t('addModal.success'), {
+        icon: '🚀',
+        theme: "dark",
+      });
       } catch (err) {
-        toast.error(t('errors.unknown'), { icon: '🚩' });
+        toast.error(t('errors.unknown'), { 
+        icon: '🚩',
+        theme: "dark",
+      });
         console.error(err);
       }
     },
   });
 
   return (
-    <Modal show>
-      <Modal.Header closeButton onHide={() => dispatch(hideModal())}>
+    <Modal show variant='dark'>
+      <Modal.Header className='border-0' style={{backgroundColor: '#212529', color: '#959cf8'}} closeButton onHide={() => dispatch(hideModal())}>
         <Modal.Title>{t('addModal.addChannel')}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={formik.handleSubmit}>
+      <Modal.Body style={{backgroundColor:'black'}}>
+        <Form onSubmit={formik.handleSubmit} style={{backgroundColor:'black'}}>
           <Form.Group className="mb-3">
             <Form.Control
               value={formik.values.name}
+              className='border-0 p-0 ps-2 form-control'
               onChange={formik.handleChange}
               ref={inputEl}
               name="name"
@@ -70,6 +77,7 @@ const AddModal = () => {
               autoFocus
               autoComplete="off"
               isInvalid={formik.errors.name && formik.touched.name}
+              style={{backgroundColor: '#212529', color: '#959cf8'}}
             />
             {
               formik.errors.name
@@ -80,11 +88,11 @@ const AddModal = () => {
               {t('addModal.channelName')}
             </Form.Label>
           </Form.Group>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between" style={{backgroundColor:'black'}}>
             <Button
               role="button"
               className="m-1"
-              variant="secondary"
+              variant="outline-secondary"
               onClick={() => dispatch(hideModal())}
             >
               {t('addModal.cancel')}
@@ -92,7 +100,7 @@ const AddModal = () => {
             <Button
               role="button"
               className="m-1"
-              variant="primary"
+              variant="outline-info"
               type="submit"
             >
               {t('addModal.send')}

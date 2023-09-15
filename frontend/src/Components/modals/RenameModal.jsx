@@ -39,10 +39,10 @@ const RenameModal = () => {
     onSubmit: async (values) => {
       try {
         await chatApi.renameChannel({ id: channelId, name: values.name });
-        toast.info(t('renameModal.success'), { icon: '✏️' });
+        toast.info(t('renameModal.success'), { icon: '✏️',theme: "dark",});
         dispatch(hideModal());
       } catch (err) {
-        toast.error(t('errors.unknown'), { icon: '🚩' });
+        toast.error(t('errors.unknown'), { icon: '🚩',theme: "dark",});
         console.error(err);
       }
     },
@@ -50,11 +50,11 @@ const RenameModal = () => {
 
   return (
     <Modal show>
-      <Modal.Header closeButton onHide={() => dispatch(hideModal())}>
+      <Modal.Header className='border-0' style={{backgroundColor: '#212529', color: '#959cf8'}} closeButton onHide={() => dispatch(hideModal())}>
         <Modal.Title>{t('renameModal.renameChannel')}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={formik.handleSubmit}>
+      <Modal.Body style={{backgroundColor:'black'}}>
+        <Form onSubmit={formik.handleSubmit} style={{backgroundColor:'black'}}>
           <Form.Group
             className="mb-3"
             controlId="exampleForm.ControlInput1"
@@ -64,11 +64,13 @@ const RenameModal = () => {
               onChange={formik.handleChange}
               ref={inputEl}
               aria-label={t('renameModal.name')}
+              className='border-0 p-0 ps-2 form-control'
               name="name"
               type="text"
               autoFocus
               autoComplete="off"
               isInvalid={formik.errors.name && formik.touched.name}
+              style={{backgroundColor: '#212529', color: '#959cf8'}}
             />
             <Form.Label className="visually-hidden">
               {t('renameModal.name')}
@@ -83,14 +85,14 @@ const RenameModal = () => {
             <Button
               className="m-1"
               role="button"
-              variant="secondary"
+              variant="outline-secondary"
               onClick={() => dispatch(hideModal())}
             >
               {t('renameModal.cancel')}
             </Button>
             <Button
               className="m-1"
-              variant="primary"
+              variant="outline-info"
               role="button"
               type="submit"
             >

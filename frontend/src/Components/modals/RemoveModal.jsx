@@ -18,11 +18,11 @@ const RemoveModal = () => {
     try {
       setSending(true);
       await chatApi.removeChannel({ id: channelId });
-      toast.warning(t('removeModal.success'), { icon: '🔥' });
+      toast.warning(t('removeModal.success'), { icon: '🔥', theme: "dark",});
       dispatch(hideModal());
       setSending(false);
     } catch (err) {
-      toast.error(t('errors.unknown'), { icon: '🚩' });
+      toast.error(t('errors.unknown'), { icon: '🚩', theme: "dark",});
       console.error(err);
       setSending(false);
     }
@@ -30,15 +30,15 @@ const RemoveModal = () => {
 
   return (
     <Modal show>
-      <Modal.Header closeButton onHide={() => dispatch(hideModal())}>
-        <Modal.Title>{t('removeModal.removeChannel')}</Modal.Title>
+      <Modal.Header className='border-0' style={{backgroundColor:'#212529'}} closeButton onHide={() => dispatch(hideModal())}>
+        <Modal.Title style={{color:'#959CF8'}}>{t('removeModal.removeChannel')}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <p className="lead">{t('removeModal.confirm')}</p>
+      <Modal.Body style={{backgroundColor:'black'}}>
+        <p style={{color:'#959CF8'}} className="lead">{t('removeModal.confirm')}</p>
         <div className="d-flex justify-content-between">
           <Button
             className="m-1"
-            variant="secondary"
+            variant="outline-secondary"
             role="button"
             onClick={() => dispatch(hideModal())}
           >
@@ -46,7 +46,7 @@ const RemoveModal = () => {
           </Button>
           <Button
             className="m-1"
-            variant="danger"
+            variant="outline-danger"
             role="button"
             onClick={handleRemove}
           >
