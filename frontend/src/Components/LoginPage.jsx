@@ -45,7 +45,7 @@ const LoginPage = () => {
     validationSchema: SignupSchema,
   });
   return (
-    <Container>
+    <Container className='mt-4' style={{backgroundColor:'black', color:'#959cf8'}}>
       <Row>
         <Col className="col-9 m-auto mt-5">
           <h1 className="text-center">{t('login.title')}</h1>
@@ -62,7 +62,8 @@ const LoginPage = () => {
                 disabled={formik.isSubmitting}
                 placeholder={t('login.username')}
                 autoComplete="off"
-                className={formik.errors.username && formik.touched.username ? 'is-invalid' : ''}
+                style={{backgroundColor: '#212529', color: '#959cf8'}}
+                className={formik.errors.username && formik.touched.username ? 'is-invalid' : 'border-0'}
               />
               <Form.Label htmlFor="floatingLogin">{t('login.username')}</Form.Label>
               {
@@ -82,7 +83,8 @@ const LoginPage = () => {
                 autoComplete="off"
                 disabled={formik.isSubmitting}
                 placeholder={t('login.password')}
-                className={formik.errors.password && formik.touched.password ? 'is-invalid' : ''}
+                style={{backgroundColor: '#212529', color: '#959cf8'}}
+                className={formik.errors.password && formik.touched.password ? 'is-invalid' : 'border-0'}
               />
               <Form.Label htmlFor="floatingPassword">{t('login.password')}</Form.Label>
               {
@@ -94,7 +96,7 @@ const LoginPage = () => {
             </Form.Group>
             <Button
               disabled={formik.isSubmitting}
-              variant="primary"
+              variant="outline-info"
               type="submit"
             >
               {formik.isSubmitting && <Spinner size="sm" />}

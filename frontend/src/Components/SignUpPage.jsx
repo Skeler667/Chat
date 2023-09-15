@@ -73,6 +73,7 @@ const SignUpPage = () => {
                   onBlur={formik.handleBlur('name')}
                   value={formik.values.name}
                   onChange={formik.handleChange('name')}
+                  style={{backgroundColor:''}}
                 />
               </FloatingLabel>
 
@@ -114,7 +115,7 @@ const SignUpPage = () => {
             </Form.Group>
 
             <div className="d-grid gap-2">
-              <Button size="lg" variant="primary" type="submit">
+              <Button size="lg" variant="outline-info" type="submit">
                 {t('signup.submit')}
               </Button>
               <p className="mt-3">
