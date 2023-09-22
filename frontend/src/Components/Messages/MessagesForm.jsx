@@ -9,8 +9,12 @@ import leoProfanity from 'leo-profanity';
 import useApi from '../../hooks/useApi';
 import useAuth from '../../hooks/useAuth.hook';
 
+import styles from '../../emojiStyle.css';
+
 import icon from '../../deployparrot.gif';
 import EmojiPicker from 'emoji-picker-react';
+import { Theme } from 'emoji-picker-react';
+
 
 const MessagesForm = () => {
   const { user } = useAuth();
@@ -68,7 +72,7 @@ const MessagesForm = () => {
         className="py-1"
       >
         <Form.Group className="input-group has-validation">
-          <Form.Control
+          <input
             value={formik.values.body}
             onChange={formik.handleChange}
             aria-label={t('messages.new')}
@@ -79,11 +83,28 @@ const MessagesForm = () => {
             disabled={formik.isSubmitting}
             placeholder={t('messages.input')}
             autoComplete="off"
-            style={{backgroundColor:'#212529', color: '#959cf8'}}
+            style={{backgroundColor:'#212529', color: '#959cf8', height:'40px', width:'500px'}}
           />
           <Form.Label className="visually-hidden">
             {t('messages.new')}
           </Form.Label>
+          <div>
+              <img src={icon} alt="" onClick={() => setOpen(!isOpen)} />
+                {isOpen && (
+                  <div style={{ backgroundColor: 'black'}}>
+                    <EmojiPicker 
+                    pickerStyle={{
+                    position: 'absolute',
+                    left: '88%',
+                    transform: 'translateX(-50%)',
+                    bottom:'120%',
+                    }}
+                    disableSearchBar={true}
+                    onEmojiClick={onEmojiClick}
+                    />
+                  </div>
+                )}
+            </div>
           <Button
             type="submit"
             disabled={!formik.values.body}
@@ -96,16 +117,7 @@ const MessagesForm = () => {
           </Button>
         </Form.Group>
       </Form>
-      <span>
-
-        <img src={icon} alt="" onClick={() => setOpen(!isOpen)} />
-
-        {isOpen && (
-        <div>
-          <EmojiPicker preload onEmojiClick={onEmojiClick} />
-        </div>
-        )}
-      </span>
+      
     </div>
   );
 };
