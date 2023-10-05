@@ -9,12 +9,8 @@ import leoProfanity from 'leo-profanity';
 import useApi from '../../hooks/useApi';
 import useAuth from '../../hooks/useAuth.hook';
 
-import styles from '../../emojiStyle.css';
-
 import icon from '../../deployparrot.gif';
 import EmojiPicker from 'emoji-picker-react';
-import { Theme } from 'emoji-picker-react';
-
 
 const MessagesForm = () => {
   const { user } = useAuth();
@@ -57,13 +53,12 @@ const MessagesForm = () => {
   });
 
   const [isOpen, setOpen] = useState(false);
+
   const onEmojiClick = (event, emojiObject) => {
-    console.log(emojiObject.emoji);
-    setChosenEmoji(...formik.values.body += emojiObject.emoji);
-    formik.setFieldValue('formik.values.body', chosenEmoji, false);
-    console.log(`current emoji: ${emojiObject.emoji}\n formik.values.body: ${formik.values.body}\n chosenEmoji: ${emojiObject.emoji}`);
+    const updatedBody = formik.values.body + emojiObject.emoji;
+    formik.setFieldValue('body', updatedBody);
     setChosenEmoji('');
-  };
+};
 
   return (
     <div className="px-5 py-3">
@@ -107,6 +102,7 @@ const MessagesForm = () => {
             </div>
           <Button
             type="submit"
+            onClick={() => setOpen(false)}
             disabled={!formik.values.body}
             className="btn-dark btn-group-vertical btn-outline-info"
           >

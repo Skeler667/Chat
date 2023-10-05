@@ -73,7 +73,7 @@ const SignUpPage = () => {
                   onBlur={formik.handleBlur('name')}
                   value={formik.values.name}
                   onChange={formik.handleChange('name')}
-                  style={{backgroundColor:''}}
+                  style={{backgroundColor:'#0dcaf0'}}
                 />
               </FloatingLabel>
 
@@ -90,6 +90,7 @@ const SignUpPage = () => {
                   onBlur={formik.handleBlur('password')}
                   value={formik.values.password}
                   onChange={formik.handleChange('password')}
+                  style={{backgroundColor:'#0dcaf0'}}
                 />
               </FloatingLabel>
               {formik.errors.password && formik.touched.password && (<Form.Text className="text-danger">{t('signup.validation.passwordLength')}</Form.Text>)}
@@ -104,6 +105,7 @@ const SignUpPage = () => {
                   value={formik.values.confirmPassword}
                   onBlur={formik.handleBlur('confirmPassword')}
                   onChange={formik.handleChange('confirmPassword')}
+                  style={{backgroundColor:'#0dcaf0'}}
                 />
               </FloatingLabel>
               {
